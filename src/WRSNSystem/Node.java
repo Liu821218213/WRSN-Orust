@@ -21,6 +21,8 @@ public class Node {
     private double lifeTime;  // 生命周期
 
     private int clusterId;
+    private double[][] uik;  // 节点i相对于簇k的隶属度值为uik
+
     private boolean isDead;  // 默认为false
     private double minEnergy; // ?
     private boolean chargeFlag;
@@ -131,6 +133,14 @@ public class Node {
 
     public void setClusterId(int clusterId) {
         this.clusterId = clusterId;
+    }
+
+    public double[][] getUik() {
+        return uik;
+    }
+
+    public void setUik(double[][] uik) {
+        this.uik = uik;
     }
 
     public boolean isDead() {

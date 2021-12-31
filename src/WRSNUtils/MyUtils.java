@@ -132,14 +132,14 @@ public class MyUtils {
         // 监控区域
         g.setColor(Color.GREEN);
         int netWidth = Constants.NET_WIDTH;
-        int netLength = Constants.NET_HEIGHT;
-        g.drawRect(0, 0, netLength, netWidth);
-        g.setColor(getColor(8));  // 网络区域
-        g.fillRect(0, 0, netLength, netWidth);
+        int netHeight = Constants.NET_HEIGHT;
+        g.drawRect(0, 0, netWidth, netHeight);
+        g.setColor(Color.WHITE);  // 网络区域
+        g.fillRect(0, 0, netWidth, netHeight);
 
         Toolkit tool = Toolkit.getDefaultToolkit();
         Image base = tool.getImage("src/images/base.png");
-        g.drawImage(base, netWidth - 13, netLength - 19, 26, 26, null);
+        g.drawImage(base, netWidth - 13, netHeight - 19, 26, 26, null);
 
         // draw nodes
         int i = 1;
@@ -155,6 +155,35 @@ public class MyUtils {
             g.setColor(Color.black);
             g.drawString(String.valueOf(i), x, y);
             g.fillOval(x - 2, y - 2, 4, 4);
+            i++;
+        }
+    }
+
+
+    public void paintNetCluster(Graphics g, List<Node> nodeList) {
+        // 监控区域
+        g.setColor(Color.GREEN);
+        int netWidth = Constants.NET_WIDTH;
+        int netHeight = Constants.NET_HEIGHT;
+        g.drawRect(0, 0, netWidth, netHeight);
+        g.setColor(Color.WHITE);  // 网络区域
+        g.fillRect(0, 0, netWidth, netHeight);
+
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        Image base = tool.getImage("src/images/base.png");
+        g.drawImage(base, netWidth - 13, netHeight - 19, 26, 26, null);
+
+        // draw nodes
+        int i = 1;
+        for (Node node : nodeList) {
+            int x = (int) (node.getX());
+            int y = (int) (node.getY());
+            int r = (int) (Constants.CIRCLE_RADIUS / 5 + 0.5);
+            g.drawOval(x - r, y - r, 2 * r, 2 * r);
+            Color c = getColor(node.getClusterId());  // 获取每个节点簇id
+            g.setColor(c);
+            g.drawString(String.valueOf(i), x, y);
+            g.fillOval(x - 2, y - 2, 6, 6);
             i++;
         }
     }

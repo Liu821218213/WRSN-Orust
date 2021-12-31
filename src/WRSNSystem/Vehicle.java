@@ -2,6 +2,8 @@ package WRSNSystem;
 
 import WRSNUtils.MyQueue;
 
+import java.util.List;
+
 /**
  * @author Orust
  * @create 2021/12/28 19:12
@@ -23,6 +25,8 @@ public class Vehicle {
     private boolean isBreaking;
     private MyQueue<Cluster> clusterTestQueue;
     private MyQueue<Node> nodeQueue;
+
+    private List<Node> clusterNodeList;
 
     public Vehicle(int id) {
         this.id = id;
@@ -154,5 +158,13 @@ public class Vehicle {
 
     public void setNodeQueue(MyQueue<Node> nodeQueue) {
         this.nodeQueue = nodeQueue;
+    }
+
+    public List<Node> getClusterNodeList() {
+        return clusterNodeList;
+    }
+
+    public void setClusterNodeList(List<Node> clusterNodeList) {
+        this.clusterNodeList = clusterNodeList;
     }
 }

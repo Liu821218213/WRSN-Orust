@@ -112,6 +112,7 @@ def cmeans(data, c, m, error, maxiter, metric='euclidean', init=None, seed=None)
 train = train.T
 center, u, u0, d, jm, p, fpc = cmeans(train, m=2, c=5, error=0.005, maxiter=1000)
 print(fpc)
+print(center)
 # print(u)
 
 file_u = 'node_U_ik.txt'

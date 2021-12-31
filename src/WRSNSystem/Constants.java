@@ -15,6 +15,8 @@ public class Constants {
     public static int HEIGHT =1000;
 
     public static double DELTA_TIME = 1;
+    public static int CLUSTER_NUMBER = 5;
+
     final public static int ANIME_DELAY =1000;
 
     // 小车
