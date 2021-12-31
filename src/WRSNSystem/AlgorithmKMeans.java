@@ -33,7 +33,6 @@ public class AlgorithmKMeans {
             vehicleList.add(vehicle);
         }
 
-
         dataSet = new ArrayList<>();
         center = new ArrayList<>();
         cluster = new ArrayList<>();
@@ -48,7 +47,8 @@ public class AlgorithmKMeans {
         boolean flag;
         Random random = new Random();
         int temp = random.nextInt(nodeList.size());
-        for (int i = 0; i < clusterNum; i++) {
+        randoms[0] = temp;
+        for (int i = 1; i < clusterNum; i++) {
             flag = true;
             while (flag) {
                 temp = random.nextInt(nodeList.size());
@@ -69,7 +69,6 @@ public class AlgorithmKMeans {
             center.add(dataSet.get(randoms[i]));  // 生成初始化中心链表
         }
         return center;
-
     }
 
 
@@ -141,7 +140,7 @@ public class AlgorithmKMeans {
         while (true) {
             setCluster();
             errorSquare();  // 计算误差的平方
-            if (m > 0 && m < 15) {
+            if (m > 0 && m < 50) {
                 double error = deviation.get(m) - deviation.get(m - 1);
 //                System.out.println(error);
                 if (error == 0) {
@@ -194,7 +193,7 @@ public class AlgorithmKMeans {
 
     public static void main(String[] args) throws FileNotFoundException {
         List<Node> nodeList = new ArrayList<>();
-        String filename = "src/datas/node.txt";
+        String filename = "src/datas/node250_100.txt";
         Scanner sc = new Scanner(new File(filename));
         StringBuilder tmp = new StringBuilder();
         while (sc.hasNextLine()) {
@@ -213,8 +212,11 @@ public class AlgorithmKMeans {
             nodeList.add(node);
         }
 
-        AlgorithmKMeans algorithmKMeans = new AlgorithmKMeans(nodeList, Constants.CLUSTER_NUMBER);
-        algorithmKMeans.kmeans();
+        for (int i = 0; i < 10; i++) {
+            AlgorithmKMeans algorithmKMeans = new AlgorithmKMeans(nodeList, Constants.CLUSTER_NUMBER);
+            algorithmKMeans.kmeans();
+        }
+
 
     }
 }
