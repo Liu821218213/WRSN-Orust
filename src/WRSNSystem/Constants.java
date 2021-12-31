@@ -26,7 +26,7 @@ public class Constants {
     // 节点
     public static double NODE_ENERGY = 150;  //  节点初始能量
     public static int NODE_NUMBER = 100;  // 节点数量
-    public static double Node_COMMUNICATION_RADIUS = 150;  // 节点通信半径
+    public static double NODE_COMMUNICATION_RADIUS = 150;  // 节点通信半径
     public static double NODE_DATA_RATE = 10;  // 节点数据产生率
 
     public static double NODE_ENERGY_FACTOR = 1E-2;
@@ -43,9 +43,9 @@ public class Constants {
 //	public static double DisWeight = 1;
 //	public static double  RateWeight=5648.57631;
 
-    public static double Beta1 =0.0000005;
-    public static double Beta2 =0.0000000013;
-    public static double p = 0.0000005;
+    public static double Beta1 =4.5e-8;  // 每bit能量消耗
+    public static double Beta2 =1e-11;  // 每bit损耗系数
+    public static double p = 5e-7;  // 数据接收率
     public static double Alpha = 4;
 
     public static int RANDOM_SEED = 100;

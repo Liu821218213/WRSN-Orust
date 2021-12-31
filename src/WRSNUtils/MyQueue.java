@@ -40,19 +40,19 @@ public class MyQueue<T> extends LinkedList<T> {
         }
     }
 
-    public static void main(String[] args) {
-        MyQueue<Integer> queue = new MyQueue<Integer>();
-
-        queue.push(2);
-        queue.push(3);
-        queue.push(4);
-        queue.push(6);
-        queue.push(3);
-
-        System.out.println(queue);
-
-        System.out.println(queue.watch());
-        queue.pop();
-        System.out.println(queue);
-    }
+//    public static void main(String[] args) {
+//        MyQueue<Integer> queue = new MyQueue<Integer>();
+//
+//        queue.push(2);
+//        queue.push(3);
+//        queue.push(4);
+//        queue.push(6);
+//        queue.push(3);
+//
+//        System.out.println(queue);
+//
+//        System.out.println(queue.watch());
+//        queue.pop();
+//        System.out.println(queue);
+//    }
 }

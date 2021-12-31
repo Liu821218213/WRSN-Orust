@@ -134,7 +134,7 @@ public class MyUtils {
         int netWidth = Constants.NET_WIDTH;
         int netLength = Constants.NET_HEIGHT;
         g.drawRect(0, 0, netLength, netWidth);
-        g.setColor(Color.GREEN);
+        g.setColor(getColor(8));  // 网络区域
         g.fillRect(0, 0, netLength, netWidth);
 
         Toolkit tool = Toolkit.getDefaultToolkit();

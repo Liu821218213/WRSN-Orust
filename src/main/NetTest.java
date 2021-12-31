@@ -13,7 +13,7 @@ public class NetTest extends JPanel {
         super.paintComponent(g);
 
         try {
-            NetSystem net = new NetSystem(Constants.NET_HEIGHT, Constants.NET_WIDTH, Constants.NODE_NUMBER);
+            NetSystem net = new NetSystem(Constants.NET_WIDTH, Constants.NET_HEIGHT, Constants.NODE_NUMBER);
             List<Node> nodelist = net.getNodeList();
 
             //绘制基本网络区域、基站以及所有节点
@@ -27,7 +27,8 @@ public class NetTest extends JPanel {
             for (int j = 0; j < nodelist.size(); j++) {
                 g.setColor(Color.red); // 设置颜色
                 ((Graphics2D) g).setStroke(new BasicStroke(1f));
-                g.drawLine((int) nodelist.get(j).getX(), (int) nodelist.get(j).getY(), (int) nexthops.get(j).getX(), (int) nexthops.get(j).getY());
+                g.drawLine((int) nodelist.get(j).getX(), (int) nodelist.get(j).getY(),
+                        (int) nexthops.get(j).getX(), (int) nexthops.get(j).getY());
             }
         } catch (Exception e) {
             e.printStackTrace(); // 异常处理？
