@@ -11,9 +11,11 @@ import java.io.IOException;
  * @create 2021/12/30 11:08
  */
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        // 初始化网络
         NetSystem net = new NetSystem(Constants.NET_WIDTH, Constants.NET_HEIGHT, Constants.NODE_NUMBER);
         net.buildDataRouter();
+        net.executeChargeMethod();
 
         for (Node node : net.getNodeList()) {
             System.out.println(node.getLifeTime());

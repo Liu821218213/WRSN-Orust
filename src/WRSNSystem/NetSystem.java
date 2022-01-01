@@ -98,6 +98,10 @@ public class NetSystem {
         }
     }
 
+    public void executeChargeMethod() throws ClassNotFoundException, IOException {
+
+    }
+
 
     public List<Node> getNodeList() {
         return nodeList;
