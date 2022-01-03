@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class GpsrAlg {
+public class AlgorithmGpsr {
     private List<Node> nodeList;
     private Node sinkNode;
     private List<Node>[] nodeNeighbors;
@@ -13,7 +13,7 @@ public class GpsrAlg {
     private double[][] edge;
     private int maxhop;
 
-    public GpsrAlg(List<Node> nodeList) {
+    public AlgorithmGpsr(List<Node> nodeList) {
         this.nodeList = nodeList;  // 初始化网络
         // 基站（sink）的id默认为nodeList.size()，位置为网络中心
         sinkNode = new Node(nodeList.size(), Constants.NET_WIDTH / 2.0, Constants.NET_HEIGHT / 2.0);

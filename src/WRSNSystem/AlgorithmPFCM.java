@@ -15,7 +15,7 @@ public class AlgorithmPFCM {
     private List<Node> nodeList;  // 节点链表
     private int clusterNum; // 簇（小车）数量
     private double[][] uik;
-    private double[] umk;  // 簇k的聚类中心节点相对于簇k的隶属度值
+//    private double[] umk;  // 簇k的聚类中心节点相对于簇k的隶属度值
 
     private List<Vehicle> vehicleList; // 簇(小车)链表
 
@@ -25,7 +25,6 @@ public class AlgorithmPFCM {
         this.clusterNum = vehicleList.size();
 
         this.uik = getUikFromPython();
-        umk = new double[clusterNum];
     }
 
     private double[][] getUikFromPython() throws IOException {
@@ -54,12 +53,15 @@ public class AlgorithmPFCM {
         for (int i = 0; i < nodeList.size(); i++) {
             int maxIdx = -1;
             double maxUik = 0;
-            for (int j = 0; j < clusterNum; j++) {
-                if (uik[i][j] >= maxUik) {
-                    maxUik = uik[i][j];
-                    maxIdx = j;
+            List<Double> temp = new ArrayList<>();
+            for (int k = 0; k < clusterNum; k++) {
+                temp.add(k, uik[i][k]);  // 每个节点相对于簇k的隶属度
+                if (uik[i][k] >= maxUik) {
+                    maxUik = uik[i][k];
+                    maxIdx = k;
                 }
             }
+            nodeList.get(i).setUk(temp);  // 设置节点相对于每个簇的隶属度uik
             nodeList.get(i).setClusterId(maxIdx);  // 设置节点所属簇
         }
 
@@ -68,8 +70,7 @@ public class AlgorithmPFCM {
             for (int j = 0; j < nodeList.size(); j++) {
                 maxUik = Math.max(maxUik, uik[j][i]);
             }
-            umk[i] = maxUik;
-            vehicleList.get(i).setUmk(maxUik);  // 设置簇的umk
+            vehicleList.get(i).setUmk(maxUik);  // 设置每个簇的umk
 //            System.out.println(clusterList.get(i).getUmk());
         }
     }

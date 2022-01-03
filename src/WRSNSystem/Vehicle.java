@@ -1,8 +1,12 @@
 package WRSNSystem;
 
+import WRSNUtils.MyPair;
 import WRSNUtils.MyQueue;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Orust
@@ -27,6 +31,7 @@ public class Vehicle {
     private MyQueue<Node> nodeQueue;
 
     private List<Node> clusterNodeList;
+    private List<MyPair> chargingQueue;
 
     private double umk;  // 簇k的聚类中心节点相对于簇k的隶属度值
 
@@ -48,6 +53,7 @@ public class Vehicle {
 
         this.clusterTestQueue = new MyQueue<>();
         this.nodeQueue = new MyQueue<>();
+        this.chargingQueue = new ArrayList<>();  // 充电序列，实现按照value排序
     }
 
     public int getId() {
@@ -176,5 +182,13 @@ public class Vehicle {
 
     public void setUmk(double umk) {
         this.umk = umk;
+    }
+
+    public List<MyPair> getChargingQueue() {
+        return chargingQueue;
+    }
+
+    public void setChargingQueue(List<MyPair> chargingQueue) {
+        this.chargingQueue = chargingQueue;
     }
 }

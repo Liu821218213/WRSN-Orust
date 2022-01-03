@@ -1,5 +1,8 @@
 package WRSNSystem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Orust
  * @create 2021/8/16 12:37
@@ -20,9 +23,10 @@ public class Node {
     private double energyRate;  // 能耗率
     private double lifeTime;  // 生命周期
 
+    private double endTime;  // 每个节点截止时刻
     private int clusterId;
-    private double[][] uik;  // 节点i相对于簇k的隶属度值为uik
-    private double[] CP;  // 每个节点相对于每个车的充电优先级charging priority
+    private List<Double> uk;  // 节点i相对于簇k的隶属度值为uik
+    private List<Double> CP;  // 每个节点相对于每个车的充电优先级charging priority
 
     private boolean isDead;  // 默认为false
     private double minEnergy; // ?
@@ -45,7 +49,8 @@ public class Node {
         this.distanceToBase = Math.sqrt(Math.pow((x - Constants.NET_WIDTH / 2.0), 2)
                 + Math.pow((y - Constants.NET_HEIGHT / 2.0), 2));
 
-        this.CP = new double[Constants.CLUSTER_NUMBER];
+        this.uk = new ArrayList<>(Constants.CLUSTER_NUMBER);
+        this.CP = new ArrayList<>(Constants.CLUSTER_NUMBER);
         this.isDead = false;
     }
 
@@ -130,6 +135,14 @@ public class Node {
         this.distanceToBase = distanceToBase;
     }
 
+    public double getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(double endTime) {
+        this.endTime = endTime;
+    }
+
     public int getClusterId() {
         return clusterId;
     }
@@ -138,19 +151,19 @@ public class Node {
         this.clusterId = clusterId;
     }
 
-    public double[][] getUik() {
-        return uik;
+    public List<Double> getUk() {
+        return uk;
     }
 
-    public void setUik(double[][] uik) {
-        this.uik = uik;
+    public void setUk(List<Double> uk) {
+        this.uk = uk;
     }
 
-    public double[] getCP() {
+    public List<Double> getCP() {
         return CP;
     }
 
-    public void setCP(double[] CP) {
+    public void setCP(List<Double> CP) {
         this.CP = CP;
     }
 

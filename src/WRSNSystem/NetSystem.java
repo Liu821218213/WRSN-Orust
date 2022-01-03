@@ -1,7 +1,5 @@
 package WRSNSystem;
 
-import WRSNUtils.MyUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,8 +19,6 @@ public class NetSystem {
     private List<Vehicle> vehicleList;
     private int vehicleNum;
 
-    private List<Vehicle> bPow;
-    private List<Vehicle> qPow;
     private int n;
     private int m;
 
@@ -58,10 +54,10 @@ public class NetSystem {
         }
     }
 
-    // 各节点能耗与总生命时间
+    // gpsr计算各节点能耗与总生命时间
     public void buildDataRouter() {
         // data router
-        GpsrAlg gpsr = new GpsrAlg(nodeList);
+        AlgorithmGpsr gpsr = new AlgorithmGpsr(nodeList);
         gpsr.getGeo();
         // next-hop node,previous-hop node
         List<Node> nexthops = gpsr.getNextHops();
@@ -87,10 +83,10 @@ public class NetSystem {
                         }
                         sendRate += receiveRate;
                         node.setSendRate(sendRate);
-                        node.setEnergyRate(Constants.p * receiveRate + c * sendRate);
+                        node.setEnergyRate(Constants.e2 * receiveRate + c * sendRate);
                     } else {
                         node.setSendRate(sendRate);
-                        node.setEnergyRate(Constants.p * receiveRate + c * sendRate);
+                        node.setEnergyRate(Constants.e2 * receiveRate + c * sendRate);
                     }
                     node.setLifeTime(Constants.NODE_ENERGY / node.getEnergyRate());
                 }
@@ -99,10 +95,29 @@ public class NetSystem {
         }
     }
 
+    public void buildDataRandom() {
+        Random rnd = new Random(1);
+        for (Node node : nodeList) {
+            double dis = 1800 + (rnd.nextDouble() * 2 - 1);
+            double e0e1 = Constants.Beta1 + Constants.Beta2 * Math.pow(dis, 2);
+            double sendRate = 60 + (rnd.nextDouble() * 2 - 1) * node.getDataRate() * 2;
+            double receiveRate = 50 + (rnd.nextDouble() * 2 - 1) * node.getDataRate() * 2;
+            node.setEnergyRate(e0e1 * sendRate + Constants.e2 * receiveRate);
+            node.setLifeTime(Constants.NODE_ENERGY / node.getEnergyRate());
+//            System.out.printf("c:%.10f 传输率:%f 感知率:%f %f %f\n", e0e1, sendRate, receiveRate, node.getEnergyRate(), node.getLifeTime());
+        }
+//        System.out.printf("c:%f 传输率:%f 感知率:%f\n", c, sendRate, receiveRate);
+    }
+
+
+
+    // 执行充电方法
     public void executeChargeMethod() throws ClassNotFoundException, IOException {
         AlgorithmPFCM pfcm = new AlgorithmPFCM(nodeList, vehicleList);
-        pfcm.PFCM();
+        pfcm.PFCM();  // 分簇，初始化各节点的隶属度属性
 
+        AlgorithmCharging charging = new AlgorithmCharging(nodeList, vehicleList);
+        charging.initQueue();
     }
 
 
@@ -110,19 +125,4 @@ public class NetSystem {
         return nodeList;
     }
 
-    public List<Vehicle> getbPow() {
-        return bPow;
-    }
-
-    public void setbPow(List<Vehicle> bPow) {
-        this.bPow = bPow;
-    }
-
-    public List<Vehicle> getqPow() {
-        return qPow;
-    }
-
-    public void setqPow(List<Vehicle> qPow) {
-        this.qPow = qPow;
-    }
 }

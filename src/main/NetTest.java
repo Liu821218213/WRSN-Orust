@@ -9,29 +9,30 @@ import java.awt.*;
 import java.util.List;
 
 public class NetTest extends JPanel {
-    public void paintComponent(Graphics g) { // ·½·¨Ãû²»ÄÜ¸Ä£¬¸²¸ÇÁË¸¸ÀàµÄpaintComponent·½·¨£¬ÖØ»æÊ±»á×Ô¶¯µ÷ÓÃ¸Ã·½·¨
+    public void paintComponent(Graphics g) { // æ–¹æ³•åä¸èƒ½æ”¹ï¼Œè¦†ç›–äº†çˆ¶ç±»çš„paintComponentæ–¹æ³•ï¼Œé‡ç»˜æ—¶ä¼šè‡ªåŠ¨è°ƒç”¨è¯¥æ–¹æ³•
         super.paintComponent(g);
 
         try {
             NetSystem net = new NetSystem(Constants.NET_WIDTH, Constants.NET_HEIGHT, Constants.NODE_NUMBER);
             List<Node> nodelist = net.getNodeList();
 
-            //»æÖÆ»ù±¾ÍøÂçÇøÓò¡¢»ùÕ¾ÒÔ¼°ËùÓĞ½Úµã
+            //ç»˜åˆ¶åŸºæœ¬ç½‘ç»œåŒºåŸŸã€åŸºç«™ä»¥åŠæ‰€æœ‰èŠ‚ç‚¹
             new MyUtils().paintNet(g, nodelist);
 
-            GpsrAlg gpsr = new GpsrAlg(nodelist);
+            AlgorithmGpsr gpsr = new AlgorithmGpsr(nodelist);
 
             gpsr.getGeo();
 
-            List<Node> nexthops = gpsr.getNextHops();
-            for (int j = 0; j < nodelist.size(); j++) {
-                g.setColor(Color.red); // ÉèÖÃÑÕÉ«
-                ((Graphics2D) g).setStroke(new BasicStroke(1f));
-                g.drawLine((int) nodelist.get(j).getX(), (int) nodelist.get(j).getY(),
-                        (int) nexthops.get(j).getX(), (int) nexthops.get(j).getY());
-            }
+//            // ç”»æ•°æ®è½¬å‘è·¯å¾„
+//            List<Node> nexthops = gpsr.getNextHops();
+//            for (int j = 0; j < nodelist.size(); j++) {
+//                g.setColor(Color.red); // è®¾ç½®é¢œè‰²
+//                ((Graphics2D) g).setStroke(new BasicStroke(1f));
+//                g.drawLine((int) nodelist.get(j).getX(), (int) nodelist.get(j).getY(),
+//                        (int) nexthops.get(j).getX(), (int) nexthops.get(j).getY());
+//            }
         } catch (Exception e) {
-            e.printStackTrace(); // Òì³£´¦Àí£¿
+            e.printStackTrace(); // å¼‚å¸¸å¤„ç†ï¼Ÿ
         }
     }
 
