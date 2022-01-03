@@ -18,7 +18,7 @@ public class Main {
         net.executeChargeMethod();
 
         for (Node node : net.getNodeList()) {
-            System.out.println(node.getLifeTime());
+            System.out.println("lifetime：" + node.getLifeTime() + "\t节点能耗：" + node.getEnergyRate());
         }
 
     }

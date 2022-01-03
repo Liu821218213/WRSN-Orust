@@ -19,8 +19,10 @@ public class NetSystem {
     private int nodeNum;
     private List<Node> nodeList;
     private List<Vehicle> vehicleList;
-
     private int vehicleNum;
+
+    private List<Vehicle> bPow;
+    private List<Vehicle> qPow;
     private int n;
     private int m;
 
@@ -49,11 +51,10 @@ public class NetSystem {
         }
 
         // 初始化充电车
-        this.vehicleNum = 4;
-        vehicleList = new ArrayList<Vehicle>();
+        this.vehicleNum = Constants.CLUSTER_NUMBER;
+        vehicleList = new ArrayList<>();
         for (int i = 0; i < this.vehicleNum; i++) {
-            Vehicle mwc = new Vehicle(i);
-            vehicleList.add(mwc);
+            vehicleList.add(new Vehicle(i));
         }
     }
 
@@ -99,11 +100,29 @@ public class NetSystem {
     }
 
     public void executeChargeMethod() throws ClassNotFoundException, IOException {
+        AlgorithmPFCM pfcm = new AlgorithmPFCM(nodeList, vehicleList);
+        pfcm.PFCM();
 
     }
 
 
     public List<Node> getNodeList() {
         return nodeList;
+    }
+
+    public List<Vehicle> getbPow() {
+        return bPow;
+    }
+
+    public void setbPow(List<Vehicle> bPow) {
+        this.bPow = bPow;
+    }
+
+    public List<Vehicle> getqPow() {
+        return qPow;
+    }
+
+    public void setqPow(List<Vehicle> qPow) {
+        this.qPow = qPow;
     }
 }

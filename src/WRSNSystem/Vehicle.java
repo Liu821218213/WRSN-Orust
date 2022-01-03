@@ -23,15 +23,17 @@ public class Vehicle {
     private boolean istoBase;
     private boolean isCharging;
     private boolean isBreaking;
-    private MyQueue<Cluster> clusterTestQueue;
+    private MyQueue<Vehicle> clusterTestQueue;
     private MyQueue<Node> nodeQueue;
 
     private List<Node> clusterNodeList;
 
+    private double umk;  // 簇k的聚类中心节点相对于簇k的隶属度值
+
     public Vehicle(int id) {
         this.id = id;
-        this.x = x;  // TODO 小车初始位置
-        this.y = y;
+        this.x = Constants.NET_WIDTH / 2.0;  // 小车初始位置设为基站
+        this.y = Constants.NET_HEIGHT - Constants.NET_HEIGHT / 2.0;
 
         this.velocity = Constants.VEHICLE_VELOCITY;
         this.energy = Constants.VEHICLE_ENERGY;
@@ -144,11 +146,11 @@ public class Vehicle {
         isBreaking = breaking;
     }
 
-    public MyQueue<Cluster> getClusterTestQueue() {
+    public MyQueue<Vehicle> getClusterTestQueue() {
         return clusterTestQueue;
     }
 
-    public void setClusterTestQueue(MyQueue<Cluster> clusterTestQueue) {
+    public void setClusterTestQueue(MyQueue<Vehicle> clusterTestQueue) {
         this.clusterTestQueue = clusterTestQueue;
     }
 
@@ -166,5 +168,13 @@ public class Vehicle {
 
     public void setClusterNodeList(List<Node> clusterNodeList) {
         this.clusterNodeList = clusterNodeList;
+    }
+
+    public double getUmk() {
+        return umk;
+    }
+
+    public void setUmk(double umk) {
+        this.umk = umk;
     }
 }

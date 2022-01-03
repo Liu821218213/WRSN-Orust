@@ -22,19 +22,20 @@ public class Node {
 
     private int clusterId;
     private double[][] uik;  // 节点i相对于簇k的隶属度值为uik
+    private double[] CP;  // 每个节点相对于每个车的充电优先级charging priority
 
     private boolean isDead;  // 默认为false
     private double minEnergy; // ?
     private boolean chargeFlag;
 
 //    private
-
+    // 基站所在点sinkNode
     public Node(int id, double x, double y) {
         this.id = id;
         this.x = x;
-        this.y = y;
+        this.y = Constants.NET_HEIGHT - y;
     }
-
+    // 传感器节点
     public Node(int id, double x, double y, double dataRate) {
         this.id = id;
         this.x = x;
@@ -43,6 +44,8 @@ public class Node {
         this.dataRate = dataRate;
         this.distanceToBase = Math.sqrt(Math.pow((x - Constants.NET_WIDTH / 2.0), 2)
                 + Math.pow((y - Constants.NET_HEIGHT / 2.0), 2));
+
+        this.CP = new double[Constants.CLUSTER_NUMBER];
         this.isDead = false;
     }
 
@@ -141,6 +144,14 @@ public class Node {
 
     public void setUik(double[][] uik) {
         this.uik = uik;
+    }
+
+    public double[] getCP() {
+        return CP;
+    }
+
+    public void setCP(double[] CP) {
+        this.CP = CP;
     }
 
     public boolean isDead() {

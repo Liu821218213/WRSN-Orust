@@ -14,11 +14,11 @@ public class GpsrAlg {
     private int maxhop;
 
     public GpsrAlg(List<Node> nodeList) {
-        this.nodeList = nodeList;  // ³õÊ¼»¯ÍøÂç
-        // »ùÕ¾£¨sink£©µÄidÄ¬ÈÏÎªnodeList.size()£¬Î»ÖÃÎªÍøÂçÖĞĞÄ
+        this.nodeList = nodeList;  // åˆå§‹åŒ–ç½‘ç»œ
+        // åŸºç«™ï¼ˆsinkï¼‰çš„idé»˜è®¤ä¸ºnodeList.size()ï¼Œä½ç½®ä¸ºç½‘ç»œä¸­å¿ƒ
         sinkNode = new Node(nodeList.size(), Constants.NET_WIDTH / 2.0, Constants.NET_HEIGHT / 2.0);
-        getNodeNeighbors();  // »ñÈ¡µ±Ç°½ÚµãÍ¨ĞÅ°ë¾¶NODE_COMMUNICATION_RADIUSÄÚµÄËùÓĞÁÚ¾Ó½Úµã
-        getRNG();  // É¾³ı²»Âú×ãgpsrÌõ¼şµÄ±ß
+        getNodeNeighbors();  // è·å–å½“å‰èŠ‚ç‚¹é€šä¿¡åŠå¾„NODE_COMMUNICATION_RADIUSå†…çš„æ‰€æœ‰é‚»å±…èŠ‚ç‚¹
+        getRNG();  // åˆ é™¤ä¸æ»¡è¶³gpsræ¡ä»¶çš„è¾¹
     }
 
     @SuppressWarnings("unchecked")
@@ -47,7 +47,7 @@ public class GpsrAlg {
 
     public void getRNG() {
         for (Node u : nodeList) {
-            int j = 0;// ¼ÇÂ¼vÔÚÁÚ¾Ó½ÚµãÖĞµÄÎ»ÖÃ
+            int j = 0;// è®°å½•våœ¨é‚»å±…èŠ‚ç‚¹ä¸­çš„ä½ç½®
             for (Node v : nodeNeighbors[u.getId()]) {
                 for (Node w : nodeNeighbors[u.getId()]) {
                     if (w.getId() != v.getId()) {
@@ -55,7 +55,7 @@ public class GpsrAlg {
                         double Duw = Math.sqrt(Math.pow((u.getX() - w.getX()), 2) + Math.pow((u.getY() - w.getY()), 2));
                         double Dvw = Math.sqrt(Math.pow((w.getX() - v.getX()), 2) + Math.pow((w.getY() - v.getY()), 2));
                         if (Duv > getMax(Duw, Dvw)) {
-                            edge[u.getId()][j] = 0;// É¾³ı±ß
+                            edge[u.getId()][j] = 0;// åˆ é™¤è¾¹
                         }
 
                     }
@@ -74,7 +74,7 @@ public class GpsrAlg {
 
     @SuppressWarnings("unchecked")
     public void getGeo() {
-        // ¼ÇÂ¼Ã¿¸ö½ÚµãµÄÇ°Ò»ÌøºÍÏÂÒ»Ìø½Úµã
+        // è®°å½•æ¯ä¸ªèŠ‚ç‚¹çš„å‰ä¸€è·³å’Œä¸‹ä¸€è·³èŠ‚ç‚¹
         nextHops = new ArrayList<Node>();
         preHops = new List[nodeList.size() + 1];
         for (int i = 0; i < preHops.length; i++) {// initial
@@ -88,7 +88,7 @@ public class GpsrAlg {
             Node nextHopNode = null;
             if (minDisToBase > Constants.NODE_COMMUNICATION_RADIUS) {
 
-                // Èô½Úµã´æÔÚÁÚ¾Ó½Úµã
+                // è‹¥èŠ‚ç‚¹å­˜åœ¨é‚»å±…èŠ‚ç‚¹
                 if (nodeNeighbors[i].size() > 0) {
 
                     for (int j = 0; j < nodeNeighbors[i].size(); j++) {
@@ -100,10 +100,10 @@ public class GpsrAlg {
                             routerHoleFlag = false;
                         }
 //						} else {
-//							// Ìí¼ÓÊ²Ã´£¿£¿
+//							// æ·»åŠ ä»€ä¹ˆï¼Ÿï¼Ÿ
 //						}
                     }
-                    // ³öÏÖÂ·ÓÉ¿Õ¶´£¬ÀûÓÃÓÒÊÖ¶¨Ôò
+                    // å‡ºç°è·¯ç”±ç©ºæ´ï¼Œåˆ©ç”¨å³æ‰‹å®šåˆ™
                     if (routerHoleFlag) {
                         double pdIn = Math.atan((sinkNode.getY() - node.getY()) / (sinkNode.getX() - node.getX()));
                         pdIn = calAngle(pdIn);
@@ -130,10 +130,10 @@ public class GpsrAlg {
                             if (node.getHop() <= nextHopNode.getHop())
                                 nextHopNode.setHop(node.getHop() + 1);
                         } else {
-                            System.out.println("²»´æÔÚ");
+                            System.out.println("ä¸å­˜åœ¨");
                         }
 
-                    } else {// ·ñÔò£¬Ì°À·Ëã·¨
+                    } else {// å¦åˆ™ï¼Œè´ªå©ªç®—æ³•
                         nextHops.add(nextHopNode);
                         preHops[nextHopNode.getId()].add(node);
                         initHop(node);
@@ -141,10 +141,10 @@ public class GpsrAlg {
                             nextHopNode.setHop(node.getHop() + 1);
                     }
                 } else {
-                    System.out.println("node" + node.getId() + "ÎŞÁÚ¾Ó½Úµã");
+                    System.out.println("node" + node.getId() + "æ— é‚»å±…èŠ‚ç‚¹");
                 }
             } else {
-                // Èç¹û½ÚµãÓë»ùÕ¾ÊÇÒ»Ìø¾àÀë£¬ÔòÏÂÒ»ÌøÎª»ùÕ¾
+                // å¦‚æœèŠ‚ç‚¹ä¸åŸºç«™æ˜¯ä¸€è·³è·ç¦»ï¼Œåˆ™ä¸‹ä¸€è·³ä¸ºåŸºç«™
                 nextHopNode = sinkNode;
                 nextHops.add(nextHopNode);
                 preHops[nextHopNode.getId()].add(node);
@@ -153,7 +153,7 @@ public class GpsrAlg {
             Node temp = nextHopNode;
             // System.out.println((node.getId() + 1) + "-:-" + (temp.getId() +
             // 1));
-            // ÔÚÁ´ÉÏĞŞ¸ÄËùÓĞºóĞø½ÚµãµÄÌøÊı
+            // åœ¨é“¾ä¸Šä¿®æ”¹æ‰€æœ‰åç»­èŠ‚ç‚¹çš„è·³æ•°
             while (nextHops.size() > temp.getId() && nextHops.get(temp.getId()).getId() != nodeList.size()) {
                 Node tempnext = nextHops.get(temp.getId());
                 // System.out.println((temp.getId() + 1) + "->" +
@@ -165,13 +165,13 @@ public class GpsrAlg {
         }
     }
 
-    // ³õÊ¼Ê±ËùÓĞÌøÊıÄ¬ÈÏÎª1
+    // åˆå§‹æ—¶æ‰€æœ‰è·³æ•°é»˜è®¤ä¸º1
     private void initHop(Node node) {
         if (node.getHop() == 0)
             node.setHop(1);
     }
 
-    // »ñÈ¡ÍøÂçµÄ×î´óÌøÊı
+    // è·å–ç½‘ç»œçš„æœ€å¤§è·³æ•°
     public int getMaxHops() {
         maxhop = 0;
         for (Node node : nodeList) {
@@ -180,14 +180,14 @@ public class GpsrAlg {
         return maxhop;
     }
 
-    // ÓÒÊÖ¶¨Ôò
+    // å³æ‰‹å®šåˆ™
     private double calAngle(double angle) {
         if (angle < 0)
             angle += 2 * Math.PI;
         return angle;
     }
 
-    // Ìá¹©¸øÍâ²¿µ÷ÓÃ
+    // æä¾›ç»™å¤–éƒ¨è°ƒç”¨
     public List<Node> getNextHops() {
         return nextHops;
     }

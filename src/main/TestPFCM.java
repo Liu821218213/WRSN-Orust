@@ -23,13 +23,12 @@ public class TestPFCM extends JPanel{
             List<Node> nodelist = net.getNodeList();
             // 执行算法
 
-            List<Cluster> clusterList = new ArrayList<>();
+            List<Vehicle> vehicleList = new ArrayList<>();
             for (int i = 0; i < Constants.CLUSTER_NUMBER; i++) {
-                Cluster cluster = new Cluster(i);
-                clusterList.add(cluster);
+                vehicleList.add(new Vehicle(i));
             }
 
-            AlgorithmPFCM pfcm = new AlgorithmPFCM(nodelist, clusterList);
+            AlgorithmPFCM pfcm = new AlgorithmPFCM(nodelist, vehicleList);
             pfcm.PFCM();
 
             //绘制基本网络区域、基站以及所有节点
