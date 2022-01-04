@@ -6,11 +6,11 @@ import WRSNSystem.Node;
  * @author Orust
  * @create 2022/1/3 21:03
  */
-public class MyPair {
+public class MyCPPair {
     Node node;
     double CP;
 
-    public MyPair(Node node, double CP) {
+    public MyCPPair(Node node, double CP) {
         this.node = node;
         this.CP = CP;
     }

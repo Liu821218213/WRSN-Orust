@@ -1,12 +1,10 @@
 package WRSNSystem;
 
-import WRSNUtils.MyPair;
+import WRSNUtils.MyCPPair;
 import WRSNUtils.MyQueue;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Orust
@@ -31,7 +29,7 @@ public class Vehicle {
     private MyQueue<Node> nodeQueue;
 
     private List<Node> clusterNodeList;
-    private List<MyPair> chargingQueue;
+    private List<MyCPPair> chargingQueue;
 
     private double umk;  // 簇k的聚类中心节点相对于簇k的隶属度值
 
@@ -42,7 +40,7 @@ public class Vehicle {
 
         this.velocity = Constants.VEHICLE_VELOCITY;
         this.energy = Constants.VEHICLE_ENERGY;
-        this.chargeRate = Constants.VEHICLE_ENERGY_RATE;
+        this.chargeRate = Constants.VEHICLE_CHARGE_ENERGY_RATE;
         this.travelEnergyRate = Constants.VEHICLE_TRAVEL_ENERGY_RATE;
         Emwc = 0;
 
@@ -184,11 +182,11 @@ public class Vehicle {
         this.umk = umk;
     }
 
-    public List<MyPair> getChargingQueue() {
+    public List<MyCPPair> getChargingQueue() {
         return chargingQueue;
     }
 
-    public void setChargingQueue(List<MyPair> chargingQueue) {
+    public void setChargingQueue(List<MyCPPair> chargingQueue) {
         this.chargingQueue = chargingQueue;
     }
 }

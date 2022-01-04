@@ -23,10 +23,10 @@ public class Constants {
 
     // 小车
     public static double VEHICLE_ENERGY =10000;  // 小车初始能量
-    public static double VEHICLE_ENERGY_RATE = 5;  // 小车能耗
+    public static double VEHICLE_CHARGE_ENERGY_RATE = 5;  // 小车充电能耗
     public static double VEHICLE_TRAVEL_ENERGY_RATE = 1;  // 小车行驶能耗
     public static double VEHICLE_VELOCITY = 5;  // 小车速度
-    public static double VEHICLE_N = 5;  // 小车充电效率
+    public static double VEHICLE_CHARGING_EFFICIENCY = 0.5;  // 小车充电效率
 
     // 节点
     public static double NODE_ENERGY = 150;  //  节点初始能量
@@ -48,9 +48,9 @@ public class Constants {
 //	public static double DisWeight = 1;
 //	public static double  RateWeight=5648.57631;
 
-    public static double Beta1 =4.5e-6;  // 每bit能量消耗
+    public static double Beta1 =4.5e-7;  // 每bit能量消耗
     public static double Beta2 =1e-9;  // 每bit损耗系数
-    public static double e2 = 5e-5;  // 数据接收率
+    public static double e2 = 5e-7;  // 数据接收率
     public static double Alpha = 4;
 
     public static int RANDOM_SEED = 100;

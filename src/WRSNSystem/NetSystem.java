@@ -118,6 +118,10 @@ public class NetSystem {
 
         AlgorithmCharging charging = new AlgorithmCharging(nodeList, vehicleList);
         charging.initQueue();
+        for (int i = 0; i < 50; i++) {
+            charging.chargeNextNode();
+        }
+
     }
 
 

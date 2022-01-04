@@ -23,10 +23,11 @@ public class Node {
     private double energyRate;  // 能耗率
     private double lifeTime;  // 生命周期
 
-    private double endTime;  // 每个节点截止时刻
+    private double lifeEndTime;  // 每个节点截止时刻
     private int clusterId;
     private List<Double> uk;  // 节点i相对于簇k的隶属度值为uik
     private List<Double> CP;  // 每个节点相对于每个车的充电优先级charging priority
+    private double lastEndChargeTime;  // 上次充电结束时刻
 
     private boolean isDead;  // 默认为false
     private double minEnergy; // ?
@@ -51,6 +52,7 @@ public class Node {
 
         this.uk = new ArrayList<>(Constants.CLUSTER_NUMBER);
         this.CP = new ArrayList<>(Constants.CLUSTER_NUMBER);
+        this.lastEndChargeTime = 0;
         this.isDead = false;
     }
 
@@ -135,12 +137,12 @@ public class Node {
         this.distanceToBase = distanceToBase;
     }
 
-    public double getEndTime() {
-        return endTime;
+    public double getLifeEndTime() {
+        return lifeEndTime;
     }
 
-    public void setEndTime(double endTime) {
-        this.endTime = endTime;
+    public void setLifeEndTime(double lifeEndTime) {
+        this.lifeEndTime = lifeEndTime;
     }
 
     public int getClusterId() {
@@ -165,6 +167,14 @@ public class Node {
 
     public void setCP(List<Double> CP) {
         this.CP = CP;
+    }
+
+    public double getLastEndChargeTime() {
+        return lastEndChargeTime;
+    }
+
+    public void setLastEndChargeTime(double lastEndChargeTime) {
+        this.lastEndChargeTime = lastEndChargeTime;
     }
 
     public boolean isDead() {
