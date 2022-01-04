@@ -59,7 +59,7 @@ public class Constants {
     public static long RANDOM_NODE_ENERGY_RATE = 1;
 
 
-    final public static double CIRCLE_RADIUS = 3;  // 节点半径
+    final public static double CIRCLE_RADIUS = 2;  // 节点半径
     final public static double EXTEND_FACTOR = 3;
 
     final public static Color COLOR_GALAXY_WHITE = new Color(255, 255, 255);

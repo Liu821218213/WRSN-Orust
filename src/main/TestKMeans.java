@@ -40,11 +40,11 @@ public class TestKMeans extends JPanel {
         int width = Constants.WIDTH;
         int height = Constants.HEIGHT;
         f.setBounds(0, 0, width, height);
-        f.getContentPane().setBackground(Constants.COLOR_GRASS_GREEN);
+//        f.getContentPane().setBackground(Constants.COLOR_OCEAN_BLUE);  // 面板背景
 
         TestKMeans nt = new TestKMeans(); // 当前类对象
         nt.setBounds(0, 0, width, height);
-        nt.setBackground(Constants.COLOR_BEAN_GREEN);
+//        nt.setBackground(Constants.COLOR_BEAN_GREEN);  // net背景
         f.add(nt);
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

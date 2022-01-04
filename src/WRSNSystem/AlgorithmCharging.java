@@ -69,7 +69,6 @@ public class AlgorithmCharging {
             System.out.println("----------------------");
         }
         for (Node node : curServingList) {
-            // TODO 绘图的节点序号下标从0开始
             System.out.printf("待充电节点%d:(%.2f, %.2f)\n", node.getId(), node.getX(), node.getY());
         }
 

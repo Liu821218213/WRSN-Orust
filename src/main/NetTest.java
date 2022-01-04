@@ -36,7 +36,7 @@ public class NetTest extends JPanel {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         JFrame f = new JFrame();
         f.setTitle("GPSR-DataRouter");
 
@@ -44,11 +44,11 @@ public class NetTest extends JPanel {
         int width = Constants.WIDTH;
         int height = Constants.HEIGHT;
         f.setBounds(0, 0, width, height);
-        f.getContentPane().setBackground(Constants.COLOR_GRASS_GREEN);
+//        f.getContentPane().setBackground(Constants.COLOR_OCEAN_BLUE);  // 面板背景
 
         NetTest nt = new NetTest();
         nt.setBounds(0, 0, width, height);
-        nt.setBackground(Constants.COLOR_BEAN_GREEN);
+//        nt.setBackground(Constants.COLOR_BEAN_GREEN);  // net背景
         f.add(nt);
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

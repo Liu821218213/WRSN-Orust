@@ -130,61 +130,54 @@ public class MyUtils {
 
     public void paintNet(Graphics g, List<Node> nodeList) {
         // 监控区域
-        g.setColor(Color.GREEN);
         int netWidth = Constants.NET_WIDTH;
         int netHeight = Constants.NET_HEIGHT;
+        g.setColor(Color.black);  // 网络边界
         g.drawRect(0, 0, netWidth, netHeight);
-        g.setColor(Color.WHITE);  // 网络区域
+        g.setColor(Color.white);  // 网络区域
         g.fillRect(0, 0, netWidth, netHeight);
-
         Toolkit tool = Toolkit.getDefaultToolkit();
-        Image base = tool.getImage("src/images/base.png");
-        g.drawImage(base, netWidth - 13, netHeight - 19, 26, 26, null);
+        Image base = tool.getImage("src/images/base.png");  // 基站
+        g.drawImage(base, netWidth / 2 - 13, netHeight / 2 - 19, 26, 26, null);
 
         // draw nodes
-        int i = 1;
-        g.setColor(Color.BLUE);
+        g.setColor(Color.black);
         for (Node node : nodeList) {
             int x = (int) (node.getX());
             int y = (int) (node.getY());
-            int r = (int) (Constants.CIRCLE_RADIUS / 5 + 0.5);
+            int r = (int) (Constants.CIRCLE_RADIUS);
             if (node.isDead()) {
                 g.setColor(Color.red);
             }
-            g.drawOval(x - r, y - r, 2 * r, 2 * r);
+//            g.drawOval(x - r, y - r, 2 * r, 2 * r);
+            g.fillOval(x - r, y - r, 2 * r, 2 * r);  // 画节点
+            g.drawString(String.valueOf(node.getId()), x, y + 10);  // 节点id
             g.setColor(Color.black);
-            g.drawString(String.valueOf(i), x, y);
-            g.fillOval(x - 2, y - 2, 4, 4);
-            i++;
         }
     }
 
 
     public void paintNetCluster(Graphics g, List<Node> nodeList) {
         // 监控区域
-        g.setColor(Color.GREEN);
         int netWidth = Constants.NET_WIDTH;
         int netHeight = Constants.NET_HEIGHT;
+        g.setColor(Color.black);  // 网络边界
         g.drawRect(0, 0, netWidth, netHeight);
-        g.setColor(Color.WHITE);  // 网络区域
+        g.setColor(Color.white);  // 网络区域
         g.fillRect(0, 0, netWidth, netHeight);
-
         Toolkit tool = Toolkit.getDefaultToolkit();
-        Image base = tool.getImage("src/images/base.png");
-        g.drawImage(base, netWidth - 13, netHeight - 19, 26, 26, null);
+        Image base = tool.getImage("src/images/base.png");  // 基站
+        g.drawImage(base, netWidth / 2 - 13, netHeight / 2 - 19, 26, 26, null);
 
         // draw nodes
-        int i = 1;
         for (Node node : nodeList) {
             int x = (int) (node.getX());
             int y = (int) (node.getY());
-            int r = (int) (Constants.CIRCLE_RADIUS / 5 + 0.5);
-            g.drawOval(x - r, y - r, 2 * r, 2 * r);
+            int r = (int) (Constants.CIRCLE_RADIUS);
             Color c = getColor(node.getClusterId());  // 获取每个节点簇id
             g.setColor(c);
-            g.drawString(String.valueOf(i), x, y);
-            g.fillOval(x - 2, y - 2, 6, 6);
-            i++;
+            g.fillOval(x - r, y - r, 2 * r, 2 * r);  // 画节点
+            g.drawString(String.valueOf(node.getId()), x, y + 10);  // 节点id
         }
     }
 
