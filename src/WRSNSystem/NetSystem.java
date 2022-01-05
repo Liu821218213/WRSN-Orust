@@ -1,6 +1,7 @@
 package WRSNSystem;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,36 @@ public class NetSystem {
         sc.close();
         String[] arr = tmp.toString().split(";");
 
+        // 初始化节点
+        for (int i = 0; i < nodeNum; i++) {
+            String[] as = arr[i].split("\t");
+            Node node = new Node(i, Double.parseDouble(as[0]), Double.parseDouble(as[1]), Constants.NODE_DATA_RATE);
+            // 实时能量,初始时为最大值最大能量
+            node.setEnergy(Constants.NODE_ENERGY);
+//            node.setStartEnergy(Constants.NODE_ENERGY);
+            nodeList.add(node);
+        }
+
+        // 初始化充电车
+        this.vehicleNum = Constants.CLUSTER_NUMBER;
+        vehicleList = new ArrayList<>();
+        for (int i = 0; i < this.vehicleNum; i++) {
+            vehicleList.add(new Vehicle(i));
+        }
+    }
+
+    public NetSystem(int sideLen, int nodeCnt, String path) throws IOException {
+        this.width = sideLen;
+        this.height = sideLen;
+        this.nodeNum = nodeCnt;
+        nodeList = new ArrayList<>();
+        Scanner sc = new Scanner(new File(path));
+        StringBuilder tmp = new StringBuilder();
+        while (sc.hasNextLine()) {
+            tmp.append(sc.nextLine().trim()).append(";");
+        }
+        sc.close();
+        String[] arr = tmp.toString().split(";");
         // 初始化节点
         for (int i = 0; i < nodeNum; i++) {
             String[] as = arr[i].split("\t");
@@ -110,7 +141,6 @@ public class NetSystem {
     }
 
 
-
     // 执行充电方法
     public void executeChargeMethod() throws ClassNotFoundException, IOException {
         AlgorithmPFCM pfcm = new AlgorithmPFCM(nodeList, vehicleList);
@@ -118,7 +148,7 @@ public class NetSystem {
 
         AlgorithmCharging charging = new AlgorithmCharging(nodeList, vehicleList);
         charging.initQueue();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
             charging.chargeNextNode();
         }
 
@@ -129,4 +159,7 @@ public class NetSystem {
         return nodeList;
     }
 
+    public List<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
 }

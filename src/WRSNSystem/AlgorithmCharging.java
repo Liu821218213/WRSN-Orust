@@ -121,7 +121,7 @@ public class AlgorithmCharging {
         Vehicle vehicle = pair.getVehicle();
         Node node = pair.getNode();
         double curTime = pair.getTime();
-        System.out.printf("车%d为节点%d充电:\tcurTime:%.2f\n", vehicle.getId(),node.getId(), curTime);
+        System.out.printf("车%d为节点%d充电:\tcurTime:%.2f\n", vehicle.getId(), node.getId(), curTime);
         double moveDis = myUtils.getEuclidDis(vehicle.getX(), vehicle.getY(), node.getX(), node.getY());
         double movePeriod = moveDis / Constants.VEHICLE_VELOCITY;
         double moveEnergy = movePeriod * Constants.VEHICLE_TRAVEL_ENERGY_RATE;
@@ -137,6 +137,7 @@ public class AlgorithmCharging {
         vehicle.setY(node.getY());
         vehicle.setEnergy(vehicle.getEnergy() - moveEnergy - chargeEnergy);
 
+        vehicle.getServeNodeList().add(node);
         updateQueue(vehicle, node, curTime);
     }
 
@@ -157,6 +158,7 @@ public class AlgorithmCharging {
                 bPow = node.getUk().get(vehicle.getId()) / vehicle.getUmk();
                 qPow = chargePeriod / (node.getLifeEndTime() - curTime + chargePeriod);
                 double cp = Math.pow(Constants.CP_b, bPow) * Math.pow(Constants.CP_q, qPow);
+//                cp = Constants.CP_b * bPow * Math.pow(Constants.CP_q, qPow);
                 vehicle.getChargingQueue().add(new MyCPPair(node, cp));  // 加入充电序列
             } else {
                 waitQueue.add(node);

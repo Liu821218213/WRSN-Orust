@@ -181,6 +181,17 @@ public class MyUtils {
         }
     }
 
+    public void paintNetTravelPath(Graphics g, List<Node> nodeList, Color color) {
+        g.setColor(color);
+        for (int i = 0; i < nodeList.size() - 1; i++) {
+            int x1 = (int) nodeList.get(i).getX();
+            int y1 = (int) nodeList.get(i).getY();
+            int x2 = (int) nodeList.get(i + 1).getX();
+            int y2 = (int) nodeList.get(i + 1).getY();
+            g.drawLine(x1, y1, x2, y2);
+        }
+    }
+
     // 设置颜色，标记各mwc的颜色以及轨迹
     public Color getColor(int i) {
         Color color = null;

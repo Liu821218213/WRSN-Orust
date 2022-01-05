@@ -11,14 +11,14 @@ public class Constants {
 //    public static int NET_RADIUS = 250; // 原本是半径，网络为圆形
     public static int NET_WIDTH = 500;  // 网络宽
     public static int NET_HEIGHT = 500;  // 网络高（长）
-    public static int WIDTH = 1000;
-    public static int HEIGHT =1000;
+    public static int WIDTH = NET_WIDTH  + 100;
+    public static int HEIGHT = NET_HEIGHT + 100;
 
     public static double DELTA_TIME = 1;
     public static int CLUSTER_NUMBER = 5;
 
     final public static int ANIME_DELAY =1000;
-    public static double CP_b = 5;
+    public static double CP_b = 1;
     public static double CP_q = 5;
 
     // 小车

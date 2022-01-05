@@ -30,6 +30,7 @@ public class Vehicle {
 
     private List<Node> clusterNodeList;
     private List<MyCPPair> chargingQueue;
+    private List<Node> serveNodeList;
 
     private double umk;  // 簇k的聚类中心节点相对于簇k的隶属度值
 
@@ -52,6 +53,7 @@ public class Vehicle {
         this.clusterTestQueue = new MyQueue<>();
         this.nodeQueue = new MyQueue<>();
         this.chargingQueue = new ArrayList<>();  // 充电序列，实现按照value排序
+        this.serveNodeList = new ArrayList<>();
     }
 
     public int getId() {
@@ -188,5 +190,13 @@ public class Vehicle {
 
     public void setChargingQueue(List<MyCPPair> chargingQueue) {
         this.chargingQueue = chargingQueue;
+    }
+
+    public List<Node> getServeNodeList() {
+        return serveNodeList;
+    }
+
+    public void setServeNodeList(List<Node> serveNodeList) {
+        this.serveNodeList = serveNodeList;
     }
 }
