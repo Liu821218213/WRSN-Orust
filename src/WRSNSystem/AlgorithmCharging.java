@@ -161,7 +161,7 @@ public class AlgorithmCharging {
 //                cp = Constants.CP_b * bPow * Math.pow(Constants.CP_q, qPow);
                 vehicle.getChargingQueue().add(new MyCPPair(node, cp));  // 加入充电序列
             } else {
-                waitQueue.add(node);
+                waitQueue.add(node);  // TODO 等待序列
             }
         }
         vehicle.getChargingQueue().sort(myCPPairComparator);
@@ -174,6 +174,10 @@ public class AlgorithmCharging {
                 break;
             }
         }
+        // 当小车能量不够时，会出现nextDeltaTimeMinHeap.size()不等于curServingList.size()的情况
+        System.out.println("************" + vehicle.getChargingQueue().size());
+//        System.out.println("************" + curServingList.size());
+//        System.out.println("****************" + nextDeltaTimeMinHeap.size());
     }
 
     public void updateNextDeltaTimeMinHeap(Vehicle vehicle, Node targetNode, double curTime) {

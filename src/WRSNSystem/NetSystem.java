@@ -148,7 +148,10 @@ public class NetSystem {
 
         AlgorithmCharging charging = new AlgorithmCharging(nodeList, vehicleList);
         charging.initQueue();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
+            if (charging.nextDeltaTimeMinHeap.size() != charging.curServingList.size()) {
+                System.out.println(i + " 小车能量不足");
+            }
             charging.chargeNextNode();
         }
 
